@@ -1,6 +1,11 @@
 <template>
   <div class="vuex">
-    <h1>Sample 화면입니다.</h1>
+    <h1>Sample 화면 입니다.</h1>
+    totalItems : {{ totalItems }} <br />
+    totalPages : {{ totalPages }} <br />
+    <ul>
+      <li v-for="(row, i) in items" :key="'result_table_' + i">{{ row }}</li>
+    </ul>
   </div>
 </template>
 
