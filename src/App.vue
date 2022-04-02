@@ -8,20 +8,29 @@
         <a v-for="(menulist,i) in menus" :key="i">{{ menulist }}</a>
       </div>
 
-      <div class="black-bg" v-if="modalState == true">
-        <div class="white-bg">
-          <h4>상세페이지</h4>
-          <img :src="rooms[openpop].image" alt="room-img" class="roomimg">
-          <p>{{ rooms[openpop].content }}</p>
-          <button @click="modalState = false">닫기</button>
-        </div>
+      <Discount />
+<!--      <Discount :name="object.name" :age="object.age"/>-->
+<!--      <Discount v-bind="object"/>-->
+<!--      <Discount :작명="데이터이름" :데이터이름="데이터이름" />-->
+<!--      <Discount 데이터이름="[123,123]" 데이터이름="안녕하세요" />-->
+
+      <div v-if="1 == 2">
+        헬로오오
+      </div>
+      <div v-else>
+        hi
       </div>
 
-      <div v-for="(a,i) in rooms" :key="i">
-        <img :src="a.image" alt="room-img" class="roomimg">
-        <h4 @click="modalState = true; openpop = i">{{a.title}}</h4>
-        <p>{{a.price}}원</p>
-      </div>
+<!--      <div class="start" :class="{ end : modalState }">-->
+      <transition name="fade">
+        <Modal @closeModal="modalState = false;" :rooms="rooms" :openpop="openpop" :modalState="modalState" />
+      </transition>
+<!--      </div>-->
+<!--      <Modal v-bind:rooms="rooms" />-->
+
+      <Card @openModal="modalState = true; openpop = $event;" :room="rooms[i]" v-for="(a,i) in rooms" :key="i" />
+<!--      <Card :a="rooms[0]" />-->
+<!--      <Card :a="rooms[1]" />-->
 
       <hr>
 
@@ -31,10 +40,10 @@
 
       <hr>
 
-      <div v-for="(a,i) in products" :key="i">
-        <h4>{{a}}</h4>
-        <p>60</p>
-      </div>
+<!--      <div v-for="(a,i) in products" :key="i">-->
+<!--        <h4>{{a}}</h4>-->
+<!--        <p>60</p>-->
+<!--      </div>-->
       <div>{{price1}}만원</div>
       <div>{{price2}}만원</div>
 
@@ -64,6 +73,9 @@
 // import Header from "./components/layout/header.vue";
 
 import data from './assets/data.js';
+import Discount from './Discount.vue';
+import Modal from './Modal.vue';
+import Card from './Card.vue';
 
 export default {
   name: "App",
@@ -77,6 +89,7 @@ export default {
       products: ['역삼동원룸','천호동원룸','망원동원룸'],
       menus: ['home','shop','about'],
       신고수: [0,0,0],
+      object: { name:'kim', age:20 }
     }
   },
   methods: {
@@ -86,11 +99,23 @@ export default {
   },
   components: {
     // Header,
+    Discount : Discount,
+    Modal : Modal,
+    Card,
   }
 };
 </script>
 
 <style>
+
+.fade-leave-from {transform:translateY(0);} /*시작시 스타일*/
+.fade-leave-active {transition:all 6s;} /*효과*/
+.fade-leave-to {transform:translateY(-1000px);} /*종료시 스타일*/
+
+.fade-enter {transform:translateY(-1000px);} /*시작시 스타일*/
+.fade-enter-active {transition:all 1s;} /*효과*/
+.fade-enter-to {transform:translateY(0);}
+
 body{padding:0;margin:0;}
 div{box-sizing:border-box;}
 #app {
@@ -118,7 +143,10 @@ div{box-sizing:border-box;}
 .menu{background:darkgoldenrod;padding:15px;border-radius:5px;}
 .menu a{color:#fff;padding:5px;}
 
-.black-bg{position:fixed;width:100%;height:100%;padding:20px;background:rgba(0,0,0,0.5);}
+.black-bg{position:fixed;top:0;width:100%;height:100%;padding:20px;background:rgba(0,0,0,0.5);}
 .white-bg{pwidth:100%;padding:20px;background:#fff;border-radius:8px;}
 .roomimg{width:300px}
+
+.start{opacity:0;transition:all 1s;}
+.end{opacity:1;}
 </style>
