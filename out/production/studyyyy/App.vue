@@ -2,7 +2,7 @@
   <div id="app">
 
     <!-- 모달창 -->
-    <Modal @closeModal="visibleModal = false;" :원룸들="원룸들" :idx="idx" :visibleModal="visibleModal" />
+    <Modal :원룸들="원룸들" :idx="idx" :visibleModal="visibleModal" />
     <!-- // 모달창 -->
 
     <!-- 메뉴 -->
@@ -16,8 +16,10 @@
     <!-- // 홍보용 -->
 
     <!-- 카드 -->
-    <Card @openModal="visibleModal = true; idx = $event" :oneroom="원룸들[i]" v-for="(oneroomList, i) in 원룸들" :key="i" />
-    <!-- <Card @openModal="visibleModal = true; idx = i" :oneroom="원룸들[i]" v-for="(oneroomList, i) in 원룸들" :key="i" /> -->
+    <Card :oneroom="원룸들[0]" />
+    <Card :oneroom="원룸들[1]" />
+    <Card :oneroom="원룸들[2]" />
+    <Card :oneroom="원룸들[3]" />
     <!-- //카드 -->
 
   </div>
@@ -25,7 +27,7 @@
 
 <script>
 import data from './assets/oneroom'; // 확장자 생략 가능
-import Discount from './components/Discount';
+import Discount from "./components/Discount";
 import Modal from './components/Modal';
 import Card from './components/Card';
 
