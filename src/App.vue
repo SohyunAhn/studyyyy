@@ -21,6 +21,8 @@
         hi
       </div>
 
+      <button @click="priceSort">가격순 정렬</button>
+
 <!--      <div class="start" :class="{ end : modalState }">-->
       <transition name="fade">
         <Modal @closeModal="modalState = false;" :rooms="rooms" :openpop="openpop" :modalState="modalState" />
@@ -96,6 +98,14 @@ export default {
     increase(){
       this.신고수 += 1
     },
+    priceSort(){
+      // this.rooms.sort()
+      var array = [3, 5, 2];
+      array.sort(function(a,b){
+        return a - b;
+      });
+
+    },
   },
   components: {
     // Header,
@@ -108,13 +118,13 @@ export default {
 
 <style>
 
-.fade-leave-from {transform:translateY(0);} /*시작시 스타일*/
+.fade-leave-from {opacity:1;} /*시작시 스타일*/
 .fade-leave-active {transition:all 6s;} /*효과*/
-.fade-leave-to {transform:translateY(-1000px);} /*종료시 스타일*/
+.fade-leave-to {opacity:0;} /*종료시 스타일*/
 
-.fade-enter {transform:translateY(-1000px);} /*시작시 스타일*/
+.fade-enter {opacity:0;} /*시작시 스타일*/
 .fade-enter-active {transition:all 1s;} /*효과*/
-.fade-enter-to {transform:translateY(0);}
+.fade-enter-to {opacity:1;}
 
 body{padding:0;margin:0;}
 div{box-sizing:border-box;}
